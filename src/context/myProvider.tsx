@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import MyContext from './myContext';
+import IContext from '../Interfaces/IContext';
+import { INITIAL_STATE } from './myContext';
 
-const INITIAL_STATE = { nome: 'Xablau', idade: 100 };
-
-function Provider({ children }) {
+function Provider({ children }: IContext) {
   const [state, setState] = useState(INITIAL_STATE);
 
   return (
-    <MyContext.Provider value={ state }>
+    <MyContext.Provider value={ INITIAL_STATE }>
       {children}
     </MyContext.Provider>
   )
