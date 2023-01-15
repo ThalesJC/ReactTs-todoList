@@ -1,13 +1,25 @@
 import { useState } from 'react';
 import MyContext from './myContext';
 import IContext from '../Interfaces/IContext';
-import { INITIAL_STATE } from './myContext';
 
 function Provider({ children }: IContext) {
-  const [state, setState] = useState(INITIAL_STATE);
+  const [task, setTask] = useState<string[]>([]);
+
+  const addTask = (text: string) => {
+    setTask([...task, text]);
+  }
+
+  const deleteATask = (target: unknown) => {
+    const remainTasks = task.filter(task => task !== target);
+    setTask(remainTasks);
+  }
+
+  const cleanTasks = () => {
+    setTask([]);
+  }
 
   return (
-    <MyContext.Provider value={ INITIAL_STATE }>
+    <MyContext.Provider value={ { task, addTask, cleanTasks, deleteATask } }>
       {children}
     </MyContext.Provider>
   )
